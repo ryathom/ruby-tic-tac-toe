@@ -5,6 +5,12 @@ require_relative 'game_board'
 
 # Game logic
 class TicTacToe
+  def initialize
+    welcome_msg
+    register_players
+    initialize_board
+  end
+
   def welcome_msg
     puts '----------------------------------'
     puts '----- Welcome to Tic Tac Toe -----'
@@ -52,6 +58,3 @@ class TicTacToe
 end
 
 game = TicTacToe.new
-game.welcome_msg
-game.register_players
-game.initialize_board

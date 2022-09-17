@@ -16,4 +16,11 @@ class GameBoard
     puts " #{@visible_board[7]} | #{@visible_board[8]} | #{@visible_board[9]}"
     puts nil
   end
+
+  def update_board(player, move)
+    @visible_board[move] = player.marker
+    @logic_board[move] = player
+
+    self.display_board
+  end
 end
