@@ -47,6 +47,19 @@ class TicTacToe
   # Asks player to pick a square and returns their choice as an integer
   def get_player_move(player)
     puts "#{player.name}, choose a square (1-9): "
+
+    chosen_square = check_valid_input
+
+    until @board.check_move_is_valid(chosen_square)
+      puts 'That square is taken, choose a different square (1-9):'
+
+      chosen_square = check_valid_input
+    end
+
+    chosen_square
+  end
+
+  def check_valid_input
     chosen_square = gets.chomp.to_i
 
     until (chosen_square.is_a? Integer) && chosen_square.between?(1, 9)
