@@ -20,24 +20,6 @@ class GameBoard
     display_scores
   end
 
-  def display_board
-    puts " #{@visible_board[1]} | #{@visible_board[2]} | #{@visible_board[3]}"
-    puts '-----------'
-    puts " #{@visible_board[4]} | #{@visible_board[5]} | #{@visible_board[6]}"
-    puts '-----------'
-    puts " #{@visible_board[7]} | #{@visible_board[8]} | #{@visible_board[9]}"
-  end
-
-  def display_scores
-    puts "#{@player1.name}: #{@player1.score}"
-    puts "#{@player2.name}: #{@player2.score}"
-    puts nil
-  end
-
-  def clear_display
-    system 'clear'
-  end
-
   def check_move_is_valid(move)
     @logic_board[move].nil?
   end
@@ -57,6 +39,26 @@ class GameBoard
     else
       false
     end
+  end
+
+  private
+
+  def display_board
+    puts " #{@visible_board[1]} | #{@visible_board[2]} | #{@visible_board[3]}"
+    puts '-----------'
+    puts " #{@visible_board[4]} | #{@visible_board[5]} | #{@visible_board[6]}"
+    puts '-----------'
+    puts " #{@visible_board[7]} | #{@visible_board[8]} | #{@visible_board[9]}"
+  end
+
+  def display_scores
+    puts "#{@player1.name}: #{@player1.score}"
+    puts "#{@player2.name}: #{@player2.score}"
+    puts nil
+  end
+
+  def clear_display
+    system 'clear'
   end
 
   def check_for_stalemate

@@ -12,11 +12,37 @@ class TicTacToe
     @game_over = false
   end
 
+  def play
+    current_player = @player1
+
+    while @game_over == false
+      move = get_player_move(current_player)
+      @board.update_board(current_player, move)
+      @game_over = @board.check_for_game_over(current_player)
+
+      current_player = toggle_player(current_player)
+    end
+
+    replay
+  end
+
+  private
+
   def welcome_msg
     puts '----------------------------------'
     puts '----- Welcome to Tic Tac Toe -----'
     puts '----------------------------------'
     puts nil
+  end
+
+  def initialize_board
+    @board = GameBoard.new(@player1, @player2)
+    @board.update_display
+  end
+
+  def register_players
+    @player1 = register_single_player(1)
+    @player2 = register_single_player(2)
   end
 
   def register_single_player(player_id)
@@ -34,17 +60,6 @@ class TicTacToe
     Player.new(name, marker)
   end
 
-  def register_players
-    @player1 = register_single_player(1)
-    @player2 = register_single_player(2)
-  end
-
-  def initialize_board
-    @board = GameBoard.new(@player1, @player2)
-    @board.update_display
-  end
-
-  # Asks player to pick a square and returns their choice as an integer
   def get_player_move(player)
     puts "#{player.name}, choose a square (1-9): "
 
@@ -77,20 +92,6 @@ class TicTacToe
     when @player2
       @player1
     end
-  end
-
-  def play
-    current_player = @player1
-
-    while @game_over == false
-      move = get_player_move(current_player)
-      @board.update_board(current_player, move)
-      @game_over = @board.check_for_game_over(current_player)
-
-      current_player = toggle_player(current_player)
-    end
-
-    replay
   end
 
   def replay
