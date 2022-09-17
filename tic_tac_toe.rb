@@ -40,7 +40,7 @@ class TicTacToe
   end
 
   def initialize_board
-    @board = GameBoard.new
+    @board = GameBoard.new(@player1, @player2)
     @board.display_board
   end
 
@@ -85,7 +85,6 @@ class TicTacToe
     while @game_over == false
       move = get_player_move(current_player)
       @board.update_board(current_player, move)
-
       @game_over = @board.check_for_winner(current_player)
 
       current_player = toggle_player(current_player)
