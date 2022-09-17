@@ -41,7 +41,7 @@ class TicTacToe
 
   def initialize_board
     @board = GameBoard.new(@player1, @player2)
-    @board.display_board
+    @board.update_display
   end
 
   # Asks player to pick a square and returns their choice as an integer
@@ -85,10 +85,22 @@ class TicTacToe
     while @game_over == false
       move = get_player_move(current_player)
       @board.update_board(current_player, move)
-      @game_over = @board.check_for_winner(current_player)
+      @game_over = @board.check_for_game_over(current_player)
 
       current_player = toggle_player(current_player)
     end
+
+    replay
+  end
+
+  def replay
+    puts 'Would you like to play again? (y/n)'
+
+    return unless gets.chomp == 'y'
+
+    @game_over = false
+    initialize_board
+    play
   end
 end
 
