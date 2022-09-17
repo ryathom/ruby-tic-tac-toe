@@ -9,6 +9,7 @@ class TicTacToe
     welcome_msg
     register_players
     initialize_board
+    @game_over = false
   end
 
   def welcome_msg
@@ -55,6 +56,29 @@ class TicTacToe
 
     chosen_square
   end
+
+  def toggle_player(current_player)
+    case current_player
+    when @player1
+      @player2
+    when @player2
+      @player1
+    end
+  end
+
+  def play
+    current_player = @player1
+
+    while @game_over == false
+      move = get_player_move(current_player)
+      @board.update_board(current_player, move)
+
+      @game_over = @board.check_for_winner(current_player)
+
+      current_player = toggle_player(current_player)
+    end
+  end
 end
 
 game = TicTacToe.new
+game.play

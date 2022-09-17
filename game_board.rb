@@ -5,6 +5,14 @@ class GameBoard
   def initialize
     @visible_board = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @logic_board = Array.new(10, nil)
+    @winning_combinations = [ [1, 2, 3],
+                              [4, 5, 6],
+                              [7, 8, 9],
+                              [1, 4, 7],
+                              [2, 5, 8],
+                              [3, 6, 9],
+                              [1, 5, 9],
+                              [3, 5, 7]]
   end
 
   def display_board
@@ -21,6 +29,19 @@ class GameBoard
     @visible_board[move] = player.marker
     @logic_board[move] = player
 
-    self.display_board
+    display_board
+  end
+
+  def check_for_winner(current_player)
+    @winning_combinations.each do |comb|
+      if @logic_board[comb[0]] == current_player && \
+         @logic_board[comb[1]] == current_player && \
+         @logic_board[comb[2]] == current_player
+
+        puts 'Game over'
+        return true
+      end
+    end
+    false
   end
 end
